@@ -1,0 +1,200 @@
+[gd_scene load_steps=8 format=3 uid="uid://cx11b5c2x7hxn"]
+
+[ext_resource type="StyleBox" uid="uid://bfp0kockhmay8" path="res://resources/file_selection_screen_texture.tres" id="1_oaohp"]
+[ext_resource type="AudioStream" uid="uid://7l8uk5kfef88" path="res://audio/file_selection.mp3" id="2_4ihdw"]
+[ext_resource type="SpriteFrames" uid="uid://c7ksta3nh827b" path="res://resources/file_selection_cursor_sprite_frames.tres" id="2_6kx7w"]
+[ext_resource type="FontFile" uid="uid://drd2ujjaeq6vt" path="res://fonts/font.fnt" id="3_lwv36"]
+[ext_resource type="Texture2D" uid="uid://cn1mmw7gabmmo" path="res://sprites/heart_icon.png" id="4_lrtwu"]
+[ext_resource type="Texture2D" uid="uid://dne30bta40x0m" path="res://sprites/arrow_cursor.png" id="5_bquga"]
+[ext_resource type="Script" path="res://scripts/blink_periodically.gd" id="6_30l85"]
+
+[node name="FileSelectionScreen" type="CanvasLayer"]
+
+[node name="FileSelectionScreen" type="PanelContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_oaohp")
+
+[node name="MarginContainer" type="MarginContainer" parent="FileSelectionScreen"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 8
+
+[node name="Selections" type="VBoxContainer" parent="FileSelectionScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="FileSelections" type="VBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="File1" type="HBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Cursor" type="Control" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File1"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File1/Cursor"]
+sprite_frames = ExtResource("2_6kx7w")
+autoplay = "default"
+frame_progress = 0.294491
+centered = false
+
+[node name="MainColumn" type="VBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File1"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="FileName" type="Label" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File1/MainColumn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lwv36")
+theme_override_font_sizes/font_size = 8
+text = "Nadji"
+
+[node name="Score" type="Label" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File1/MainColumn"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_lwv36")
+theme_override_font_sizes/font_size = 8
+text = "123"
+
+[node name="LifeAmount" type="HFlowContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File1"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="HeartIcon" type="TextureRect" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File1/LifeAmount"]
+layout_mode = 2
+texture = ExtResource("4_lrtwu")
+
+[node name="File2" type="HBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Cursor" type="Control" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File2"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File2/Cursor"]
+sprite_frames = ExtResource("2_6kx7w")
+autoplay = "default"
+frame_progress = 0.294491
+centered = false
+
+[node name="MainColumn" type="VBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File2"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="FileName" type="Label" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File2/MainColumn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lwv36")
+theme_override_font_sizes/font_size = 8
+text = "Nadji"
+
+[node name="Score" type="Label" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File2/MainColumn"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_lwv36")
+theme_override_font_sizes/font_size = 8
+text = "123"
+
+[node name="LifeAmount" type="HFlowContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File2"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="HeartIcon" type="TextureRect" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File2/LifeAmount"]
+layout_mode = 2
+texture = ExtResource("4_lrtwu")
+
+[node name="File3" type="HBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Cursor" type="Control" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File3"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File3/Cursor"]
+sprite_frames = ExtResource("2_6kx7w")
+autoplay = "default"
+frame_progress = 0.294491
+centered = false
+
+[node name="MainColumn" type="VBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File3"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="FileName" type="Label" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File3/MainColumn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_lwv36")
+theme_override_font_sizes/font_size = 8
+text = "Nadji"
+
+[node name="Score" type="Label" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File3/MainColumn"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_lwv36")
+theme_override_font_sizes/font_size = 8
+text = "123"
+
+[node name="LifeAmount" type="HFlowContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File3"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="HeartIcon" type="TextureRect" parent="FileSelectionScreen/MarginContainer/Selections/FileSelections/File3/LifeAmount"]
+layout_mode = 2
+texture = ExtResource("4_lrtwu")
+
+[node name="FileManagement" type="HBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections"]
+custom_minimum_size = Vector2(0, 17)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Cursor" type="Control" parent="FileSelectionScreen/MarginContainer/Selections/FileManagement"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+
+[node name="Sprite" type="AnimatedSprite2D" parent="FileSelectionScreen/MarginContainer/Selections/FileManagement/Cursor"]
+sprite_frames = ExtResource("2_6kx7w")
+autoplay = "default"
+frame_progress = 0.294491
+centered = false
+
+[node name="EraseOption" type="HBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileManagement"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+
+[node name="Cursor" type="TextureRect" parent="FileSelectionScreen/MarginContainer/Selections/FileManagement/EraseOption"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_bquga")
+stretch_mode = 3
+script = ExtResource("6_30l85")
+interval = 0.25
+
+[node name="CopyOption" type="HBoxContainer" parent="FileSelectionScreen/MarginContainer/Selections/FileManagement"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+
+[node name="Cursor" type="TextureRect" parent="FileSelectionScreen/MarginContainer/Selections/FileManagement/CopyOption"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+texture = ExtResource("5_bquga")
+stretch_mode = 3
+script = ExtResource("6_30l85")
+interval = 0.25
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_4ihdw")
+autoplay = true
