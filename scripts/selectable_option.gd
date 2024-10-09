@@ -3,11 +3,16 @@ class_name SelectableOption
 extends Node
 
 signal selected
+signal unselected
+signal chosen
 
 @export var focused: bool = false
 
-func _process(delta: float) -> void:
-	if not focused:
-		return
-	
-	pass
+func select() -> void:
+	selected.emit()
+
+func unselect() -> void:
+	unselected.emit()
+
+func choose() -> void:
+	chosen.emit()

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6w8dctel1qxf"]
+
+[ext_resource type="Texture2D" uid="uid://dne30bta40x0m" path="res://sprites/arrow_cursor.png" id="1_6jnii"]
+[ext_resource type="Script" path="res://scripts/blink_periodically.gd" id="2_gj163"]
+
+[node name="Cursor" type="TextureRect"]
+custom_minimum_size = Vector2(16, 16)
+texture = ExtResource("1_6jnii")
+stretch_mode = 3
+script = ExtResource("2_gj163")
+interval = 0.25

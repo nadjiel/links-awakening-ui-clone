@@ -1,14 +1,10 @@
 extends PanelContainer
 
-@onready var files: Array[Control] = [
-	%File1,
-	%File2,
-	%File3,
-	%FileManagement
-]
+const GAME_SCENE: PackedScene = preload("res://scenes/game_scene.tscn")
 
-var options: Array = []
-
-func _process(delta: float) -> void:
-	
-	pass
+func go_to_game_screen() -> void:
+	TransitionScene.transition_finished.connect(
+		func(): get_tree().change_scene_to_packed(GAME_SCENE),
+		CONNECT_ONE_SHOT
+	)
+	TransitionScene.transition()
