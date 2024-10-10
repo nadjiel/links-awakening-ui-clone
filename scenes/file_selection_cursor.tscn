@@ -12,3 +12,4 @@ sprite_frames = ExtResource("1_svkon")
 autoplay = "default"
 frame_progress = 0.294491
 centered = false
+offset = Vector2(0, -5)

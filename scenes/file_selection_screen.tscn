@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx11b5c2x7hxn"]
+[gd_scene load_steps=12 format=3 uid="uid://cx11b5c2x7hxn"]
 
 [ext_resource type="StyleBox" uid="uid://bfp0kockhmay8" path="res://resources/file_selection_screen_texture.tres" id="1_oaohp"]
 [ext_resource type="AudioStream" uid="uid://7l8uk5kfef88" path="res://audio/file_selection.mp3" id="2_4ihdw"]
 [ext_resource type="Script" path="res://scripts/file_selection_screen.gd" id="2_20mu5"]
 [ext_resource type="Script" path="res://scripts/v_option_group.gd" id="3_k01p2"]
-[ext_resource type="FontFile" uid="uid://drd2ujjaeq6vt" path="res://fonts/font.fnt" id="3_lwv36"]
 [ext_resource type="Script" path="res://scripts/file_selectable_option.gd" id="4_bqny6"]
-[ext_resource type="Texture2D" uid="uid://cn1mmw7gabmmo" path="res://sprites/heart_icon.png" id="4_lrtwu"]
+[ext_resource type="PackedScene" uid="uid://3jasuf8hib26" path="res://scenes/file_option.tscn" id="4_o4p2i"]
 [ext_resource type="PackedScene" uid="uid://c8ry7swjvx1xl" path="res://scenes/file_selection_cursor.tscn" id="5_kwuu2"]
 [ext_resource type="Script" path="res://scripts/h_option_group.gd" id="7_73yu8"]
 [ext_resource type="PackedScene" uid="uid://b6w8dctel1qxf" path="res://scenes/file_option_selection_cursor.tscn" id="9_5megu"]
+[ext_resource type="AudioStream" uid="uid://blykmyfh7l7r0" path="res://audio/menu_cursor.wav" id="10_8icao"]
+[ext_resource type="AudioStream" uid="uid://oi17bs55bbyk" path="res://audio/menu_selection.wav" id="11_neul2"]
 
 [node name="FileSelectionScreen" type="PanelContainer"]
 anchors_preset = 15
@@ -29,131 +30,23 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Selections" type="VBoxContainer" parent="MarginContainer" node_paths=PackedStringArray("options")]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 8
 script = ExtResource("3_k01p2")
 focused = true
 options = [NodePath("File1"), NodePath("File2"), NodePath("File3"), NodePath("FileManagement")]
 initial_option = 0
 
-[node name="File1" type="MarginContainer" parent="MarginContainer/Selections" node_paths=PackedStringArray("icon_parent")]
+[node name="File1" parent="MarginContainer/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
-theme_override_constants/margin_bottom = 8
-script = ExtResource("4_bqny6")
-file_selection_icon_scene = ExtResource("5_kwuu2")
-icon_parent = NodePath("Columns")
 
-[node name="Columns" type="HBoxContainer" parent="MarginContainer/Selections/File1"]
+[node name="File2" parent="MarginContainer/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 2
 
-[node name="MainColumn" type="VBoxContainer" parent="MarginContainer/Selections/File1/Columns"]
+[node name="File3" parent="MarginContainer/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="FileName" type="Label" parent="MarginContainer/Selections/File1/Columns/MainColumn"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_lwv36")
-theme_override_font_sizes/font_size = 8
-text = "Nadji"
-
-[node name="Score" type="Label" parent="MarginContainer/Selections/File1/Columns/MainColumn"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("3_lwv36")
-theme_override_font_sizes/font_size = 8
-text = "123"
-
-[node name="LifeAmount" type="HFlowContainer" parent="MarginContainer/Selections/File1/Columns"]
-custom_minimum_size = Vector2(56, 0)
-layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
-
-[node name="HeartIcon" type="TextureRect" parent="MarginContainer/Selections/File1/Columns/LifeAmount"]
-layout_mode = 2
-texture = ExtResource("4_lrtwu")
-
-[node name="File2" type="MarginContainer" parent="MarginContainer/Selections" node_paths=PackedStringArray("icon_parent")]
-layout_mode = 2
-theme_override_constants/margin_bottom = 8
-script = ExtResource("4_bqny6")
-file_selection_icon_scene = ExtResource("5_kwuu2")
-icon_parent = NodePath("Columns")
-
-[node name="Columns" type="HBoxContainer" parent="MarginContainer/Selections/File2"]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 2
-
-[node name="MainColumn" type="VBoxContainer" parent="MarginContainer/Selections/File2/Columns"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="FileName" type="Label" parent="MarginContainer/Selections/File2/Columns/MainColumn"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_lwv36")
-theme_override_font_sizes/font_size = 8
-text = "Nadji"
-
-[node name="Score" type="Label" parent="MarginContainer/Selections/File2/Columns/MainColumn"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("3_lwv36")
-theme_override_font_sizes/font_size = 8
-text = "123"
-
-[node name="LifeAmount" type="HFlowContainer" parent="MarginContainer/Selections/File2/Columns"]
-custom_minimum_size = Vector2(56, 0)
-layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
-
-[node name="HeartIcon" type="TextureRect" parent="MarginContainer/Selections/File2/Columns/LifeAmount"]
-layout_mode = 2
-texture = ExtResource("4_lrtwu")
-
-[node name="File3" type="MarginContainer" parent="MarginContainer/Selections" node_paths=PackedStringArray("icon_parent")]
-layout_mode = 2
-theme_override_constants/margin_bottom = 3
-script = ExtResource("4_bqny6")
-file_selection_icon_scene = ExtResource("5_kwuu2")
-icon_parent = NodePath("Columns")
-
-[node name="Columns" type="HBoxContainer" parent="MarginContainer/Selections/File3"]
-layout_mode = 2
-theme_override_constants/separation = 8
-alignment = 2
-
-[node name="MainColumn" type="VBoxContainer" parent="MarginContainer/Selections/File3/Columns"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="FileName" type="Label" parent="MarginContainer/Selections/File3/Columns/MainColumn"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_lwv36")
-theme_override_font_sizes/font_size = 8
-text = "Nadji"
-
-[node name="Score" type="Label" parent="MarginContainer/Selections/File3/Columns/MainColumn"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("3_lwv36")
-theme_override_font_sizes/font_size = 8
-text = "123"
-
-[node name="LifeAmount" type="HFlowContainer" parent="MarginContainer/Selections/File3/Columns"]
-custom_minimum_size = Vector2(56, 0)
-layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 0
-
-[node name="HeartIcon" type="TextureRect" parent="MarginContainer/Selections/File3/Columns/LifeAmount"]
-layout_mode = 2
-texture = ExtResource("4_lrtwu")
 
 [node name="FileManagement" type="HBoxContainer" parent="MarginContainer/Selections" node_paths=PackedStringArray("icon_parent")]
-custom_minimum_size = Vector2(0, 17)
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 2
@@ -181,12 +74,23 @@ script = ExtResource("4_bqny6")
 file_selection_icon_scene = ExtResource("9_5megu")
 icon_parent = NodePath(".")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_4ihdw")
 autoplay = true
 
+[node name="CursorMoved" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_8icao")
+
+[node name="SelectionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_neul2")
+
+[connection signal="option_chosen" from="MarginContainer/Selections" to="SelectionSound" method="play"]
+[connection signal="selection_changed" from="MarginContainer/Selections" to="CursorMoved" method="play"]
 [connection signal="chosen" from="MarginContainer/Selections/File1" to="." method="go_to_game_screen"]
 [connection signal="chosen" from="MarginContainer/Selections/File2" to="." method="go_to_game_screen"]
 [connection signal="chosen" from="MarginContainer/Selections/File3" to="." method="go_to_game_screen"]
 [connection signal="selected" from="MarginContainer/Selections/FileManagement" to="MarginContainer/Selections/FileManagement/Options" method="set_focused" binds= [true]]
 [connection signal="unselected" from="MarginContainer/Selections/FileManagement" to="MarginContainer/Selections/FileManagement/Options" method="set_focused" binds= [false]]
+[connection signal="selection_changed" from="MarginContainer/Selections/FileManagement/Options" to="CursorMoved" method="play"]
+[connection signal="chosen" from="MarginContainer/Selections/FileManagement/Options/EraseOption" to="." method="go_to_erase_screen"]
+[connection signal="chosen" from="MarginContainer/Selections/FileManagement/Options/CopyOption" to="." method="go_to_copy_screen"]

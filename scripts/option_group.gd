@@ -2,6 +2,9 @@
 class_name OptionGroup
 extends Node
 
+signal selection_changed
+signal option_chosen
+
 @export var focused: bool = false:
 	set = set_focused
 
@@ -22,6 +25,9 @@ func set_curr_option(new_id: int) -> void:
 	
 	if prev_option == new_id:
 		return
+	
+	selection_changed.emit()
+	
 	if prev_option != -1:
 		options[prev_option].unselect()
 	
@@ -55,3 +61,4 @@ func _process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("enter"):
 		options[curr_option].choose()
+		option_chosen.emit()

@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://3jasuf8hib26"]
+
+[ext_resource type="Script" path="res://scripts/file_selectable_option.gd" id="1_3ds4u"]
+[ext_resource type="PackedScene" uid="uid://c8ry7swjvx1xl" path="res://scenes/file_selection_cursor.tscn" id="2_skps0"]
+[ext_resource type="FontFile" uid="uid://drd2ujjaeq6vt" path="res://fonts/font.fnt" id="3_vl6fb"]
+[ext_resource type="Texture2D" uid="uid://cn1mmw7gabmmo" path="res://sprites/heart_icon.png" id="4_6kwt1"]
+
+[node name="FileOption" type="HBoxContainer" node_paths=PackedStringArray("icon_parent")]
+offset_right = 104.0
+offset_bottom = 16.0
+theme_override_constants/separation = 8
+alignment = 2
+script = ExtResource("1_3ds4u")
+file_selection_icon_scene = ExtResource("2_skps0")
+icon_parent = NodePath(".")
+
+[node name="MainColumn" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="FileName" type="Label" parent="MainColumn"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_vl6fb")
+theme_override_font_sizes/font_size = 8
+text = "Nadji"
+
+[node name="Score" type="Label" parent="MainColumn"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("3_vl6fb")
+theme_override_font_sizes/font_size = 8
+text = "123"
+
+[node name="LifeAmount" type="HFlowContainer" parent="."]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="HeartIcon" type="TextureRect" parent="LifeAmount"]
+layout_mode = 2
+texture = ExtResource("4_6kwt1")
