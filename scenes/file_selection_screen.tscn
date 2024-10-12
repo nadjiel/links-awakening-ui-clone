@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx11b5c2x7hxn"]
+[gd_scene load_steps=13 format=3 uid="uid://cx11b5c2x7hxn"]
 
 [ext_resource type="StyleBox" uid="uid://bfp0kockhmay8" path="res://resources/file_selection_screen_texture.tres" id="1_oaohp"]
 [ext_resource type="AudioStream" uid="uid://7l8uk5kfef88" path="res://audio/file_selection.mp3" id="2_4ihdw"]
-[ext_resource type="Script" path="res://scripts/file_selection_screen.gd" id="2_20mu5"]
+[ext_resource type="Script" path="res://scripts/navigator.gd" id="2_22us7"]
 [ext_resource type="Script" path="res://scripts/v_option_group.gd" id="3_k01p2"]
 [ext_resource type="Script" path="res://scripts/file_selectable_option.gd" id="4_bqny6"]
 [ext_resource type="PackedScene" uid="uid://3jasuf8hib26" path="res://scenes/file_option.tscn" id="4_o4p2i"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b6w8dctel1qxf" path="res://scenes/file_option_selection_cursor.tscn" id="9_5megu"]
 [ext_resource type="AudioStream" uid="uid://blykmyfh7l7r0" path="res://audio/menu_cursor.wav" id="10_8icao"]
 [ext_resource type="AudioStream" uid="uid://oi17bs55bbyk" path="res://audio/menu_selection.wav" id="11_neul2"]
+[ext_resource type="Script" path="res://scripts/audio_player.gd" id="12_3usj2"]
 
 [node name="FileSelectionScreen" type="PanelContainer"]
 anchors_preset = 15
@@ -19,16 +20,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_oaohp")
-script = ExtResource("2_20mu5")
+script = ExtResource("2_22us7")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="Selections" type="VBoxContainer" parent="MarginContainer" node_paths=PackedStringArray("options")]
+[node name="Selections" type="VBoxContainer" parent="Margin" node_paths=PackedStringArray("options")]
 layout_mode = 2
 theme_override_constants/separation = 8
 script = ExtResource("3_k01p2")
@@ -36,16 +37,16 @@ focused = true
 options = [NodePath("File1"), NodePath("File2"), NodePath("File3"), NodePath("FileManagement")]
 initial_option = 0
 
-[node name="File1" parent="MarginContainer/Selections" instance=ExtResource("4_o4p2i")]
+[node name="File1" parent="Margin/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
 
-[node name="File2" parent="MarginContainer/Selections" instance=ExtResource("4_o4p2i")]
+[node name="File2" parent="Margin/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
 
-[node name="File3" parent="MarginContainer/Selections" instance=ExtResource("4_o4p2i")]
+[node name="File3" parent="Margin/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
 
-[node name="FileManagement" type="HBoxContainer" parent="MarginContainer/Selections" node_paths=PackedStringArray("icon_parent")]
+[node name="FileManagement" type="HBoxContainer" parent="Margin/Selections" node_paths=PackedStringArray("icon_parent")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -54,20 +55,20 @@ script = ExtResource("4_bqny6")
 file_selection_icon_scene = ExtResource("5_kwuu2")
 icon_parent = NodePath(".")
 
-[node name="Options" type="HBoxContainer" parent="MarginContainer/Selections/FileManagement" node_paths=PackedStringArray("options")]
+[node name="Options" type="HBoxContainer" parent="Margin/Selections/FileManagement" node_paths=PackedStringArray("options")]
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("7_73yu8")
 options = [NodePath("EraseOption"), NodePath("CopyOption")]
 
-[node name="EraseOption" type="HBoxContainer" parent="MarginContainer/Selections/FileManagement/Options" node_paths=PackedStringArray("icon_parent")]
+[node name="EraseOption" type="HBoxContainer" parent="Margin/Selections/FileManagement/Options" node_paths=PackedStringArray("icon_parent")]
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
 script = ExtResource("4_bqny6")
 file_selection_icon_scene = ExtResource("9_5megu")
 icon_parent = NodePath(".")
 
-[node name="CopyOption" type="HBoxContainer" parent="MarginContainer/Selections/FileManagement/Options" node_paths=PackedStringArray("icon_parent")]
+[node name="CopyOption" type="HBoxContainer" parent="Margin/Selections/FileManagement/Options" node_paths=PackedStringArray("icon_parent")]
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
 script = ExtResource("4_bqny6")
@@ -77,20 +78,19 @@ icon_parent = NodePath(".")
 [node name="BGMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_4ihdw")
 autoplay = true
+parameters/looping = true
 
-[node name="CursorMoved" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_8icao")
+[node name="CustomAudioPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("12_3usj2")
+streams = Array[AudioStream]([ExtResource("10_8icao"), ExtResource("11_neul2")])
 
-[node name="SelectionSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_neul2")
-
-[connection signal="option_chosen" from="MarginContainer/Selections" to="SelectionSound" method="play"]
-[connection signal="selection_changed" from="MarginContainer/Selections" to="CursorMoved" method="play"]
-[connection signal="chosen" from="MarginContainer/Selections/File1" to="." method="go_to_game_screen"]
-[connection signal="chosen" from="MarginContainer/Selections/File2" to="." method="go_to_game_screen"]
-[connection signal="chosen" from="MarginContainer/Selections/File3" to="." method="go_to_game_screen"]
-[connection signal="selected" from="MarginContainer/Selections/FileManagement" to="MarginContainer/Selections/FileManagement/Options" method="set_focused" binds= [true]]
-[connection signal="unselected" from="MarginContainer/Selections/FileManagement" to="MarginContainer/Selections/FileManagement/Options" method="set_focused" binds= [false]]
-[connection signal="selection_changed" from="MarginContainer/Selections/FileManagement/Options" to="CursorMoved" method="play"]
-[connection signal="chosen" from="MarginContainer/Selections/FileManagement/Options/EraseOption" to="." method="go_to_erase_screen"]
-[connection signal="chosen" from="MarginContainer/Selections/FileManagement/Options/CopyOption" to="." method="go_to_copy_screen"]
+[connection signal="option_chosen" from="Margin/Selections" to="CustomAudioPlayer" method="play_global_stream_with_id" binds= [1]]
+[connection signal="selection_changed" from="Margin/Selections" to="CustomAudioPlayer" method="play_stream_with_id" binds= [0]]
+[connection signal="chosen" from="Margin/Selections/File1" to="." method="go_to_game_scene"]
+[connection signal="chosen" from="Margin/Selections/File2" to="." method="go_to_game_scene"]
+[connection signal="chosen" from="Margin/Selections/File3" to="." method="go_to_game_scene"]
+[connection signal="selected" from="Margin/Selections/FileManagement" to="Margin/Selections/FileManagement/Options" method="set_focused" binds= [true]]
+[connection signal="unselected" from="Margin/Selections/FileManagement" to="Margin/Selections/FileManagement/Options" method="set_focused" binds= [false]]
+[connection signal="selection_changed" from="Margin/Selections/FileManagement/Options" to="CustomAudioPlayer" method="play_stream_with_id" binds= [0]]
+[connection signal="chosen" from="Margin/Selections/FileManagement/Options/EraseOption" to="." method="go_to_file_erase_scene"]
+[connection signal="chosen" from="Margin/Selections/FileManagement/Options/CopyOption" to="." method="go_to_file_copy_scene"]

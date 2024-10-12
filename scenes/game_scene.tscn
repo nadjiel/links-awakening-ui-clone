@@ -1,15 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://bd2md75ko67ba"]
 
-[ext_resource type="Script" path="res://scripts/game_scene.gd" id="1_108qc"]
+[ext_resource type="Script" path="res://scripts/navigator.gd" id="1_allkg"]
 [ext_resource type="StyleBox" uid="uid://bmfjt21yytuwh" path="res://resources/transition_scene_style_box.tres" id="1_fxb8q"]
 [ext_resource type="FontFile" uid="uid://drd2ujjaeq6vt" path="res://fonts/font.fnt" id="2_didoc"]
 
 [node name="GameScene" type="Node2D"]
-script = ExtResource("1_108qc")
+script = ExtResource("1_allkg")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="BG" type="PanelContainer" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_fxb8q")
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer"]
+[node name="Text" type="Label" parent="UI/BG"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_didoc")
@@ -30,4 +30,4 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="go_to_title_screen"]
+[connection signal="timeout" from="Timer" to="." method="go_to_title_scene"]

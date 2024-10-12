@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c064abialkwg1"]
+[gd_scene load_steps=9 format=3 uid="uid://c064abialkwg1"]
 
 [ext_resource type="StyleBox" uid="uid://xix3a5hnklpr" path="res://resources/file_erase_screen_texture.tres" id="1_uwl6s"]
-[ext_resource type="Script" path="res://scripts/file_erase_screen.gd" id="2_2qlxe"]
+[ext_resource type="Script" path="res://scripts/navigator.gd" id="2_s7xch"]
 [ext_resource type="PackedScene" uid="uid://3jasuf8hib26" path="res://scenes/file_option.tscn" id="2_u5nlh"]
 [ext_resource type="Script" path="res://scripts/v_option_group.gd" id="2_ylnwk"]
+[ext_resource type="PackedScene" uid="uid://cx11b5c2x7hxn" path="res://scenes/file_selection_screen.tscn" id="3_ltx3f"]
 [ext_resource type="Script" path="res://scripts/file_selectable_option.gd" id="3_w2vdi"]
 [ext_resource type="PackedScene" uid="uid://c8ry7swjvx1xl" path="res://scenes/file_selection_cursor.tscn" id="4_8q05u"]
 [ext_resource type="FontFile" uid="uid://drd2ujjaeq6vt" path="res://fonts/font.fnt" id="6_lwwul"]
@@ -15,16 +16,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_uwl6s")
-script = ExtResource("2_2qlxe")
+script = ExtResource("2_s7xch")
+previous_scene = ExtResource("3_ltx3f")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" node_paths=PackedStringArray("options")]
+[node name="Selections" type="VBoxContainer" parent="Margin" node_paths=PackedStringArray("options")]
 layout_mode = 2
 theme_override_constants/separation = 8
 script = ExtResource("2_ylnwk")
@@ -32,16 +34,16 @@ focused = true
 options = [NodePath("File1"), NodePath("File2"), NodePath("File3"), NodePath("GoBack")]
 initial_option = 0
 
-[node name="File1" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_u5nlh")]
+[node name="File1" parent="Margin/Selections" instance=ExtResource("2_u5nlh")]
 layout_mode = 2
 
-[node name="File2" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_u5nlh")]
+[node name="File2" parent="Margin/Selections" instance=ExtResource("2_u5nlh")]
 layout_mode = 2
 
-[node name="File3" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_u5nlh")]
+[node name="File3" parent="Margin/Selections" instance=ExtResource("2_u5nlh")]
 layout_mode = 2
 
-[node name="GoBack" type="HBoxContainer" parent="MarginContainer/VBoxContainer" node_paths=PackedStringArray("icon_parent")]
+[node name="GoBack" type="HBoxContainer" parent="Margin/Selections" node_paths=PackedStringArray("icon_parent")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -50,11 +52,11 @@ script = ExtResource("3_w2vdi")
 file_selection_icon_scene = ExtResource("4_8q05u")
 icon_parent = NodePath(".")
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GoBack"]
+[node name="Label" type="Label" parent="Margin/Selections/GoBack"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("6_lwwul")
 theme_override_font_sizes/font_size = 8
 text = "RETURN TO MENU"
 
-[connection signal="chosen" from="MarginContainer/VBoxContainer/GoBack" to="." method="go_back_to_menu"]
+[connection signal="chosen" from="Margin/Selections/GoBack" to="." method="go_to_previous_scene"]
