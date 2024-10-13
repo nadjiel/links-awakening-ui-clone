@@ -26,14 +26,10 @@ theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 8
 
-[node name="Options" type="VBoxContainer" parent="Margin" node_paths=PackedStringArray("options", "next_option_group")]
+[node name="Options" type="VBoxContainer" parent="Margin"]
 layout_mode = 2
 theme_override_constants/separation = 8
 script = ExtResource("2_c8j3c")
-focused = true
-options = [NodePath("FileTable/FromColumn/File1"), NodePath("FileTable/FromColumn/File2"), NodePath("FileTable/FromColumn/File3"), NodePath("GoBack")]
-initial_option = 0
-next_option_group = NodePath("FileTable/ToColumn")
 
 [node name="FileTable" type="HBoxContainer" parent="Margin/Options"]
 layout_mode = 2
@@ -48,6 +44,7 @@ theme_override_constants/separation = 8
 [node name="File1" parent="Margin/Options/FileTable/FromColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/FromColumn/File1/MainColumn" index="1"]
 visible = false
@@ -58,6 +55,7 @@ visible = false
 [node name="File2" parent="Margin/Options/FileTable/FromColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/FromColumn/File2/MainColumn" index="1"]
 visible = false
@@ -68,6 +66,7 @@ visible = false
 [node name="File3" parent="Margin/Options/FileTable/FromColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/FromColumn/File3/MainColumn" index="1"]
 visible = false
@@ -75,18 +74,16 @@ visible = false
 [node name="LifeAmount" parent="Margin/Options/FileTable/FromColumn/File3" index="1"]
 visible = false
 
-[node name="ToColumn" type="VBoxContainer" parent="Margin/Options/FileTable" node_paths=PackedStringArray("options", "previous_option_group")]
+[node name="ToColumn" type="VBoxContainer" parent="Margin/Options/FileTable"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_constants/separation = 8
 script = ExtResource("2_c8j3c")
-options = [NodePath("File1"), NodePath("File2"), NodePath("File3"), NodePath("../../GoBack")]
-initial_option = 0
-previous_option_group = NodePath("../..")
 
 [node name="File1" parent="Margin/Options/FileTable/ToColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/ToColumn/File1/MainColumn" index="1"]
 visible = false
@@ -97,6 +94,7 @@ visible = false
 [node name="File2" parent="Margin/Options/FileTable/ToColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/ToColumn/File2/MainColumn" index="1"]
 visible = false
@@ -107,6 +105,7 @@ visible = false
 [node name="File3" parent="Margin/Options/FileTable/ToColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
+focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/ToColumn/File3/MainColumn" index="1"]
 visible = false
@@ -131,7 +130,6 @@ theme_override_font_sizes/font_size = 8
 text = "RETURN TO MENU"
 
 [connection signal="option_chosen" from="Margin/Options" to="Margin/Options" method="focus_next"]
-[connection signal="chosen" from="Margin/Options/GoBack" to="." method="go_to_previous_scene"]
 
 [editable path="Margin/Options/FileTable/FromColumn/File1"]
 [editable path="Margin/Options/FileTable/FromColumn/File2"]

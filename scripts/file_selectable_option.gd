@@ -4,13 +4,25 @@ extends SelectableOption
 
 @export var icon_parent: Node
 
+@export var default_icon_visibility: bool = true
+
 var icon_node: Node
 
 func _ready() -> void:
-	selected.connect(_on_selected)
-	unselected.connect(_on_unselected)
+	if default_icon_visibility == false:
+		call_deferred("hide_icon")
+	
+	was_selected.connect(show_icon)
+	was_unselected.connect(hide_icon)
 
-func _on_selected() -> void:
+func icon_is_shown() -> bool:
+	return icon_node != null
+
+func show_icon() -> void:
+	if not selected:
+		return
+	if icon_is_shown():
+		return
 	if file_selection_icon_scene == null:
 		return
 	if icon_parent == null:
@@ -21,10 +33,10 @@ func _on_selected() -> void:
 	icon_parent.add_child(icon_node)
 	icon_parent.move_child(icon_node, 0)
 
-func _on_unselected() -> void:
-	if icon_parent == null:
+func hide_icon() -> void:
+	if not icon_is_shown():
 		return
-	if icon_node == null:
+	if icon_parent == null:
 		return
 	
 	icon_parent.remove_child(icon_node)

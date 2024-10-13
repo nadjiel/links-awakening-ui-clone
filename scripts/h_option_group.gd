@@ -5,7 +5,7 @@ extends OptionGroup
 func _process(delta: float) -> void:
 	super._process(delta)
 	
-	if not focused:
+	if not focus:
 		return
 	
 	if Input.is_action_just_pressed("right"):
