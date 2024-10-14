@@ -44,7 +44,6 @@ theme_override_constants/separation = 8
 [node name="File1" parent="Margin/Options/FileTable/FromColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/FromColumn/File1/MainColumn" index="1"]
 visible = false
@@ -55,7 +54,6 @@ visible = false
 [node name="File2" parent="Margin/Options/FileTable/FromColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/FromColumn/File2/MainColumn" index="1"]
 visible = false
@@ -66,7 +64,6 @@ visible = false
 [node name="File3" parent="Margin/Options/FileTable/FromColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/FromColumn/File3/MainColumn" index="1"]
 visible = false
@@ -83,7 +80,6 @@ script = ExtResource("2_c8j3c")
 [node name="File1" parent="Margin/Options/FileTable/ToColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/ToColumn/File1/MainColumn" index="1"]
 visible = false
@@ -94,7 +90,6 @@ visible = false
 [node name="File2" parent="Margin/Options/FileTable/ToColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/ToColumn/File2/MainColumn" index="1"]
 visible = false
@@ -105,7 +100,6 @@ visible = false
 [node name="File3" parent="Margin/Options/FileTable/ToColumn" instance=ExtResource("2_cdffo")]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
-focus = false
 
 [node name="Score" parent="Margin/Options/FileTable/ToColumn/File3/MainColumn" index="1"]
 visible = false

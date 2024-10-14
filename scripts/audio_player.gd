@@ -1,3 +1,5 @@
+
+class_name AudioPlayer
 extends AudioStreamPlayer
 
 @export var streams: Array[AudioStream] = []

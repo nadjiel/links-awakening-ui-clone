@@ -7,6 +7,8 @@ func _process(delta: float) -> void:
 	
 	if not focus:
 		return
+	#if focused_frames < 3:
+		#return
 	
 	if Input.is_action_just_pressed("down"):
 		select_next()

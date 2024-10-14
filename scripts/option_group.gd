@@ -4,7 +4,7 @@ extends NavigatableUI
 
 signal selection_changed(new_selection: SelectableOption)
 signal not_first_selection_changed()
-signal option_chosen(option: SelectableOption)
+signal option_chosen()
 
 @export var initial_option_id: int = -1:
 	set = set_initial_option_id
@@ -95,6 +95,14 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not focus:
 		return
+	if focused_now:
+		focused_now = false
+		return
+	
+	#focused_frames += 1
+	
+	#if focused_frames < 3:
+		#return
 	
 	if Input.is_action_just_pressed("enter"):
 		var curr_option: SelectableOption = get_curr_option()

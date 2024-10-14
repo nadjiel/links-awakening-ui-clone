@@ -39,15 +39,12 @@ children = [NodePath("File1"), NodePath("File2"), NodePath("File3"), NodePath("F
 
 [node name="File1" parent="Margin/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
-focus = false
 
 [node name="File2" parent="Margin/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
-focus = false
 
 [node name="File3" parent="Margin/Selections" instance=ExtResource("4_o4p2i")]
 layout_mode = 2
-focus = false
 
 [node name="FileManagement" type="HBoxContainer" parent="Margin/Selections" node_paths=PackedStringArray("icon_parent")]
 custom_minimum_size = Vector2(0, 16)
