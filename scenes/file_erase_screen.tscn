@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c064abialkwg1"]
+[gd_scene load_steps=13 format=3 uid="uid://c064abialkwg1"]
 
 [ext_resource type="StyleBox" uid="uid://xix3a5hnklpr" path="res://resources/file_erase_screen_texture.tres" id="1_uwl6s"]
 [ext_resource type="Script" path="res://scripts/file_erase_screen.gd" id="2_taja1"]
@@ -8,10 +8,9 @@
 [ext_resource type="Script" path="res://scripts/file_selectable_option.gd" id="3_w2vdi"]
 [ext_resource type="PackedScene" uid="uid://c8ry7swjvx1xl" path="res://scenes/file_selection_cursor.tscn" id="4_8q05u"]
 [ext_resource type="FontFile" uid="uid://drd2ujjaeq6vt" path="res://fonts/font.fnt" id="6_lwwul"]
-[ext_resource type="Script" path="res://scripts/h_option_group.gd" id="9_r7m01"]
+[ext_resource type="PackedScene" uid="uid://bf40jxg3hcddt" path="res://scenes/popup.tscn" id="9_mj04h"]
 [ext_resource type="Script" path="res://scripts/audio_player.gd" id="9_wr03d"]
 [ext_resource type="AudioStream" uid="uid://blykmyfh7l7r0" path="res://audio/menu_cursor.wav" id="10_d3o14"]
-[ext_resource type="PackedScene" uid="uid://b6w8dctel1qxf" path="res://scenes/file_option_selection_cursor.tscn" id="10_krbta"]
 [ext_resource type="AudioStream" uid="uid://oi17bs55bbyk" path="res://audio/menu_selection.wav" id="11_yme0d"]
 
 [node name="FileEraseScreen" type="PanelContainer"]
@@ -65,44 +64,8 @@ theme_override_fonts/font = ExtResource("6_lwwul")
 theme_override_font_sizes/font_size = 8
 text = "RETURN TO MENU"
 
-[node name="Popup" type="HBoxContainer" parent="Margin/Selections" node_paths=PackedStringArray("children")]
-visible = false
+[node name="Popup" parent="Margin/Selections" instance=ExtResource("9_mj04h")]
 layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 2
-script = ExtResource("9_r7m01")
-initial_option_id = 0
-children = [NodePath("Quit"), NodePath("Ok")]
-
-[node name="Quit" type="HBoxContainer" parent="Margin/Selections/Popup" node_paths=PackedStringArray("icon_parent")]
-custom_minimum_size = Vector2(48, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 2
-script = ExtResource("3_w2vdi")
-file_selection_icon_scene = ExtResource("10_krbta")
-icon_parent = NodePath(".")
-
-[node name="Label" type="Label" parent="Margin/Selections/Popup/Quit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_lwwul")
-theme_override_font_sizes/font_size = 8
-text = "QUIT"
-
-[node name="Ok" type="HBoxContainer" parent="Margin/Selections/Popup" node_paths=PackedStringArray("icon_parent")]
-custom_minimum_size = Vector2(48, 0)
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 2
-script = ExtResource("3_w2vdi")
-file_selection_icon_scene = ExtResource("10_krbta")
-icon_parent = NodePath(".")
-
-[node name="Label" type="Label" parent="Margin/Selections/Popup/Ok"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_lwwul")
-theme_override_font_sizes/font_size = 8
-text = "OK  "
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 script = ExtResource("9_wr03d")
@@ -116,7 +79,8 @@ streams = Array[AudioStream]([ExtResource("10_d3o14"), ExtResource("11_yme0d")])
 [connection signal="chosen" from="Margin/Selections/File3" to="." method="show_popup"]
 [connection signal="chosen" from="Margin/Selections/File3" to="AudioPlayer" method="play_stream_with_id" binds= [1]]
 [connection signal="chosen" from="Margin/Selections/GoBack" to="." method="go_to_file_selection_scene"]
-[connection signal="not_first_selection_changed" from="Margin/Selections/Popup" to="AudioPlayer" method="play_stream_with_id" binds= [0]]
 [connection signal="chosen" from="Margin/Selections/Popup/Quit" to="." method="go_to_previous_scene"]
 [connection signal="chosen" from="Margin/Selections/Popup/Ok" to="." method="go_to_previous_scene"]
 [connection signal="chosen" from="Margin/Selections/Popup/Ok" to="AudioPlayer" method="play_global_stream_with_id" binds= [1]]
+
+[editable path="Margin/Selections/Popup"]
